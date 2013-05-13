@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <bitcoincenter_btcpay_btcpay_index>
+       <reference name="content">
+            <block type="core/template" name="bitcoincenter_success" template="bitcoincenter/success.phtml" />
+            </reference>
+        </bitcoincenter_btcpay_btcpay_index>
+  
+    
+</layout>

@@ -1,0 +1,38 @@
+
+<div class="page-title">
+    <h1><?php echo $this->__('Your BITCOIN order has been received.') ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<h2 class="sub-title"><?php echo $this->__('Thank you for your purchase!') ?></h2>
+
+<?php
+// a little code here, sorry for that. @community, feel free to move this
+
+$quote_id = $this->getRequest()->getParam('quote_id');
+$quote = Mage::getModel('sales/quote')->load($quote_id);
+$orders = Mage::getModel('sales/order')->getCollection()->addFieldToFilter('quote_id',$quote_id);
+$order = null;
+$error = 0;
+foreach ($orders as $_order){
+	$order = $_order;
+	//this loop only loops once
+}
+if ($order != null) {
+	$order = Mage::getModel('sales/order')->load($order->getId());
+	echo $order->getIncrementId();
+} else {
+	$error++;
+	//smth. went wrong
+}
+
+
+?>
+
+
+
+  
+
+
+<div class="buttons-set">
+    <button type="button" class="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+</div>
