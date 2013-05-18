@@ -119,22 +119,18 @@
         </jobs> 
     </crontab>
     -->
+    
     <default>
         <payment>
             <bitcoincenter>
-                <model>bitcoincenter_btcpay/payment</model>
-                <title>btc</title>
-
+                <model>btcpay/payment</model>
+                <title>Pay with Bitcoins</title>
                 <active>0</active>
-
+				<apiurl>http://www.bitcoincenter.nl/apiv1</apiurl>
                 <merchant_id />
-              
-
                 <order_status>pending</order_status>
-                <order_autosell>0</order_autosell>
-                <order_email>0</order_email>
-                <order_instant_only>0</order_instant_only>
             </bitcoincenter>
         </payment>
     </default>
+    
 </config>

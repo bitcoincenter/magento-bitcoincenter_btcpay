@@ -22,16 +22,34 @@
                         <order_status translate="label">
                             <label>New Order Status</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_order_status_processing</source_model>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
                             <sort_order>2</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </order_status>
+                        <paid_status translate="label">
+                            <label>Paid Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </paid_status>
+                        <revoked_status translate="label">
+                            <label>Revoked Order Status (this is not used in this version)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </revoked_status>
                         <apiurl translate="label">
                             <label>API Url</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>3</sort_order>
+                            <sort_order>5</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -39,7 +57,7 @@
                         <merchantcode translate="label">
                             <label>Merchant Code</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>4</sort_order>
+                            <sort_order>6</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -47,7 +65,7 @@
                         <title translate="label">
                             <label>Payment Title</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>5</sort_order>
+                            <sort_order>7</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>

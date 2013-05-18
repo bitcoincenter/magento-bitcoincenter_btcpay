@@ -1,4 +1,10 @@
 <?php
+/**
+ *
+ * @category    Bitcoincenter
+ * @package     Bitcoincenter_Btcpay
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
 class Bitcoincenter_Btcpay_Model_Payment extends Mage_Payment_Model_Method_Abstract
 {
     protected $_code = 'bitcoincenter';
@@ -46,10 +52,28 @@ class Bitcoincenter_Btcpay_Model_Payment extends Mage_Payment_Model_Method_Abstr
 		 // $checkoutSession->getLastOrderId();
 		$quote_id = Mage::getSingleton('checkout/session')->getQuoteId();
 		$quote = Mage::getModel('sales/quote')->load($quote_id);
-		Mage::log('quote_id: '.$quote_id);
-		Mage::log('total: '.$quote->getData('grand_total'));
+		$api_url = Mage::getStoreConfig('payment/bitcoincenter/apiurl');
+		$merchant_code = Mage::getStoreConfig('payment/bitcoincenter/merchantcode');
+		$report_url = Mage::helper('core/url')->getHomeUrl().'btcpay/btcpay/report/quote/'.$quote_id;
+
+		$client = new Zend_Rest_Client();
+		$client->setUri($api_url.'?function=market_value&currency=eur&amount='.$quote->getData('grand_total'));
+		$satoshi = $client->get()->satoshi;
 		
-		return Mage::getUrl('btcpay/btcpay/', array('quote_id' => $quote_id));
+		
+		$client2 = new Zend_Rest_Client();
+		$url = $api_url.'?function=address&amount='.$satoshi.'&merchant_code='.$merchant_code.'&report_url='.urlencode($report_url);
+		$client2->setUri($url);
+		$address = $client2->get()->address;
+		
+		
+		
+		$btcpay = Mage::getModel('btcpay/btcpay');
+		$btcpay->setQuoteId($quote_id);
+		$btcpay->setAddress($address);
+		$btcpay->save();
+		
+		return Mage::getUrl('btcpay/btcpay/', array('quote_id' => $quote_id, 'satoshi' => ''.$satoshi));
 	 }
 
    

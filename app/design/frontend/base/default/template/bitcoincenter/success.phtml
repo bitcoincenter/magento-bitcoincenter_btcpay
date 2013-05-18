@@ -9,10 +9,15 @@
 // a little code here, sorry for that. @community, feel free to move this
 
 $quote_id = $this->getRequest()->getParam('quote_id');
+
+$btc = floatval($this->getRequest()->getParam('satoshi'))/100000000;
+$btc = number_format($btc,8,'.','');
 $quote = Mage::getModel('sales/quote')->load($quote_id);
 $orders = Mage::getModel('sales/order')->getCollection()->addFieldToFilter('quote_id',$quote_id);
 $order = null;
 $error = 0;
+$_btc = Mage::getModel('btcpay/btcpay')->load($quote_id);
+$address = $_btc->getAddress();
 foreach ($orders as $_order){
 	$order = $_order;
 	//this loop only loops once
@@ -20,6 +25,13 @@ foreach ($orders as $_order){
 if ($order != null) {
 	$order = Mage::getModel('sales/order')->load($order->getId());
 	echo $order->getIncrementId();
+	echo '<br />Please transfer <b>'.$btc.'</b> BTC to <br />';
+	echo $address;
+	echo '<br />';
+	// using google for qr code generation. Later bitcoincenter will provide qr code itself
+	echo '<img src="https://chart.googleapis.com/chart?chs=400x400&chl='.$address.'&cht=qr" title="Bitcoin address" />';
+	
+	
 } else {
 	$error++;
 	//smth. went wrong
