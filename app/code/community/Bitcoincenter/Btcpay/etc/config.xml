@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Bitcoincenter_Btcpay>
+            <version>1.0.0</version>
+        </Bitcoincenter_Btcpay>
+    </modules>
+    <global>
+		<helpers>
+            <bitcoincenter_btcpay>
+                <class>Bitcoincenter_Btcpay_Helper</class>
+            </bitcoincenter_btcpay>
+        </helpers>
+        <models>
+            <btcpay>
+                <class>Bitcoincenter_Btcpay_Model</class>
+                <resourceModel>btcpay_mysql4</resourceModel>
+            </btcpay>
+             <btcpay_mysql4>
+                <class>Bitcoincenter_Btcpay_Model_Mysql4</class>
+                <entities>
+                    <btcpay>
+                        <table>bitcoincenter_btcpay</table>
+                    </btcpay>
+                </entities>
+            </btcpay_mysql4>
+        </models>
+        <resources>
+            <btcpay_setup>
+                <setup>
+                    <module>Bitcoincenter_Btcpay</module>
+                    <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+                </setup>
+                <connection>
+					<use>core_setup</use>
+			  </connection>
+            </btcpay_setup>
+            <btcpay_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </btcpay_write>
+            <btcpay_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </btcpay_read>
+        </resources>
+        <blocks>
+            <bitcoincenter_btcpay>
+                <class>Bitcoincenter_Btcpay_Block</class>
+            </bitcoincenter_btcpay>
+            <bitcoincenter_btcpay_adminhtml>
+                <class>Bitcoincenter_Btcpay_Block_Adminhtml</class>
+            </bitcoincenter_btcpay_adminhtml>
+        </blocks>
+        
+        
+        
+        
+        
+        <!--
+        <events>
+            <catalog_product_load_after>
+                <observers>
+                    <bitcoincenter_btcpay>
+                        <class>bitcoincenter_btcpay/observer</class>
+                        <method>catalogProductLoadAfter</method>
+                    </bitcoincenter_btcpay>
+                </observers>
+            </catalog_product_load_after>
+        </events>
+        -->
+    </global>
+    <frontend>
+		
+        <routers>
+           <bitcoincenter_btcpay>
+               <use>standard</use>
+               <args>
+                   <module>Bitcoincenter_Btcpay</module>
+                   <frontName>btcpay</frontName>
+               </args>
+           </bitcoincenter_btcpay>
+        </routers>
+        
+        <layout>
+            <updates>
+                <bitcoincenter_btcpay>
+                    <file>bitcoincenter_btcpay.xml</file>
+                </bitcoincenter_btcpay>
+            </updates>
+        </layout>
+    </frontend>
+    <!--
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Bitcoincenter_Btcpay before="Mage_Adminhtml">Bitcoincenter_Btcpay_Adminhtml</Bitcoincenter_Btcpay>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    -->
+    <!--
+    <crontab>
+        <jobs>
+            <bitcoincenter_btcpay_cron>
+                <schedule>
+                    <cron_expr>0,45 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>bitcoincenter_btcpay/observer::methodName</model>
+                </run>
+            </bitcoincenter_btcpay_cron>
+        </jobs> 
+    </crontab>
+    -->
+    
+    <default>
+        <payment>
+            <bitcoincenter>
+                <model>btcpay/payment</model>
+                <title>Pay with Bitcoins</title>
+                <active>0</active>
+				<apiurl>http://www.bitcoincenter.nl/apiv1</apiurl>
+                <merchant_id />
+                <order_status>pending</order_status>
+            </bitcoincenter>
+        </payment>
+    </default>
+    
+</config>
