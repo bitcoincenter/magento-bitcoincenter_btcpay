@@ -56,8 +56,18 @@ class Bitcoincenter_Btcpay_Model_Payment extends Mage_Payment_Model_Method_Abstr
 		$merchant_code = Mage::getStoreConfig('payment/bitcoincenter/merchantcode');
 		$report_url = Mage::helper('core/url')->getHomeUrl().'btcpay/btcpay/report/quote/'.$quote_id;
 
+		$currency = Mage::getStoreConfig('payment/bitcoincenter/currency');
+		if ($currency == 'other'){		// there is a rate specified manually
+			$rate = Mage::getStoreConfig('payment/bitcoincenter/rate');
+			$rate = str_replace(',','.',$rate);
+			$amount = $quote->getData('grand_total')/$rate;
+			$currency = 'usd';
+		} else {
+			$amount = $quote->getData('grand_total');
+		}
+
 		$client = new Zend_Rest_Client();
-		$client->setUri($api_url.'?function=market_value&currency=eur&amount='.$quote->getData('grand_total'));
+		$client->setUri($api_url.'?function=market_value&currency='.$currency.'&amount='.$amount);
 		$satoshi = $client->get()->satoshi;
 		
 		
