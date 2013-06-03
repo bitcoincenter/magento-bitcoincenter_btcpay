@@ -90,7 +90,7 @@ class Bitcoincenter_Btcpay_Model_Payment extends Mage_Payment_Model_Method_Abstr
     
     public function isAvailable($quote = NULL)
     {
-        return Mage::getStoreConfig('payment/btcpay/active');
+        return Mage::getStoreConfig('payment/bitcoincenter/active');
     }
     public function canUseForCurrency($currencyCode)
     {
